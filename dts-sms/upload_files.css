@@ -1,0 +1,37 @@
+/*Style for Add Document*/
+<style>
+  .main-content .info{
+    margin: 10px;
+    margin-left: 23.5%;
+    color: #1F4E79;;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 12px; 
+    border-bottom: 1px solid #2F5597;
+
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .content .cards {
+    padding: 20px 15px;
+    display: block;
+    align-items: center;  
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .content .cards .card {
+    width: 80%;
+    height: 50px;
+    background: white;
+    margin: 0px 10px;
+    margin-left: 265px;
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 12px 0 rgba(0, 0, 0, 0.10);
+  }
+</style>

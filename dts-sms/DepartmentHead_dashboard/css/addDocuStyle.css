@@ -1,0 +1,177 @@
+      <style>
+      /*@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');*/
+          *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+          }
+          body{
+              display: block;
+              height: 100vh;
+              justify-content: center;
+              align-items: center;
+              background: #86ABF9;
+          }
+          .container{
+                max-height: 500px;
+                height: 500%;
+                max-width: 800px;
+                width: 80%;
+                padding: 40px 50px;
+                border-radius: 5px;
+                margin-top: 0px;
+                margin-left: 30%;
+                /*position: relative;*/
+        }
+        .main-content .info{
+    margin: 10px;
+    margin-left: 23.5%;
+    color: #1F4E79;;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 12px; 
+    border-bottom: 1px solid #2F5597;
+
+  }
+          /* Style inputs, select elements and textareas */
+          input[type=text], select, textarea{
+            font-style: inherit;
+            width: 80%;
+            padding: 5px;
+            height: 35px; 
+            border: 1.3px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+          }
+          /* Style the label to display next to the inputs */
+          label {
+            font-style: normal;
+            padding: 7px 12px 12px 0;
+            display: inline-block;
+            font-weight: 600;
+            margin-top: -2%;
+          }
+
+          form button {
+            background-color: #878c8f;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            padding: 10px 40px;
+          }
+          /* Style the send & draft button */
+         
+          form .btnSave input{
+            background-color: #63A2E7;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-right: 150px;
+            padding: 10px 40px;
+          }
+          label .start{
+            display: block;
+            font: 1rem 'Poppins', sans-serif;
+          }
+
+          input[type=date],
+          label .start{
+              margin: .4rem 0;
+              margin-left: 70px;
+              margin-top: -100px;
+              width: 200px;
+          }
+
+           form .btnDraft input{
+            background-color:  #357EDD;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-right: 150px;
+            padding: 10px 20px;
+          }
+
+          /* Style the container */
+          .container {
+            display: block;
+            border-radius: 5px;
+            background-color: transparent;
+            padding: 0 50px;
+            align-items: center;
+            justify-content: center;
+            margin-top: -3%;
+            position: fixed;
+          }
+          .tracking_no input[type=text]
+          {
+            background-color: #E5E5E5;
+            color: #01008A;
+          }
+
+          .tracking_no {
+            float: left;
+            width: 75%;
+            margin-top: -1px;
+          }
+          /* Floating column for labels: 25% width */
+          .col-25 {
+            float: left;
+            width: 25%;
+            margin-bottom: 20px;
+          }
+          /* Floating column for inputs: 75% width */
+          .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: -3px;
+          }
+          .file {
+           /* display: inline-block;
+            margin: auto;
+            width: 50%; */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            margin-top: 8px;
+          }
+    
+          h5{
+            color: red;
+            font-size: 12px;
+            margin-left: -14px;
+          }
+
+/* Clear floats after the columns */
+          .row:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          @media screen and (max-width: 600px) {
+          .col-25, .col-75, input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+          }
+        }
+
+        /*Required fields*/
+        .asterisk{
+          color: red;
+          font-size: 16px;
+        }
+        .error{
+          color: red;
+          font-size: 12px;
+        }

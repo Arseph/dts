@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  background: #fff;
+  background-size: cover;
+  background-position: center;
+}
+
+.wrapper .side-bar{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background: #86ABF9;
+  position: fixed;
+}
+
+.wrapper .side-bar .menu{
+  width: 100%;
+  margin-top: 0px;
+}
+
+.wrapper .side-bar .menu .item{
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper .side-bar .menu .item a{
+  color: white ;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 5px 20px;
+  line-height: 40px;
+}
+
+.wrapper .side-bar .menu .item a:hover{
+  color: white;
+  background: #2F5597;
+  transition: 0.2s ease;
+}
+
+.wrapper .side-bar .menu .item i{
+  margin-right: 18px;
+}
+
+.wrapper .side-bar .menu .item a .dropdown{
+  position: absolute;
+  right: 20px;
+  margin: 20px;
+  margin-top: 11px;
+  transition: 0.2s ease;
+}
+
+.wrapper .side-bar .menu .item .sub-menu{
+  background: rgba(255, 255, 255, 0.1);
+  display: none;
+}
+
+.wrapper .side-bar .menu .item .sub-menu a{
+  padding-left: 55px;
+}
+.rotate{
+  transform: rotate(90deg);
+}
