@@ -4,7 +4,7 @@
         <div class="imgcontainer">
                <img src="img/lk.png" width="170px" height="100px;" class="img-fluid" style="margin-bottom: -1%; margin-top: 2%;">
                <h5 class="d1">Document Tracking System</h5>
-               <h6 class="d2">with SMS Notification</h6>
+               <br>
                 <style>
                   .imgcontainer{
                     margin-left: -5px;
@@ -35,20 +35,22 @@
                   <a class="sub-btn"><i class="fas fa-folder-open"></i>Documents<i class="fas fa-angle-right dropdown"></i>
 
                 <div class="sub-menu">
-                    <a href="inquiry_document.php"><i class="fas fa-search"></i>Inquiry</a>
+                    <!--<a href="inquiry_document.php"><i class="fas fa-search"></i>Inquiry</a>-->
                     <a href="add_document.php"><i class="fas fa-folder-plus"></i>Add New Document</a>
                     <a href="receive_docu.php"><i class="fas fa-file-import"></i>Receiving Documents</a>
                     <a href="outgoingDocuments.php"><i class="fas fa-paper-plane"></i>Outgoing Documents</a>
                     <a href="draft_files.php"><i class="fas fa-pencil-alt"></i>Drafts</a>
                     <a href="view_files.php"><i class="fas fa-folder"></i>Repositories</a>
-                    <a href="archive.php"><i class="fas fa-file-archive"></i>Archive</a>  
+                    <!--<a href="archive.php"><i class="fas fa-file-archive"></i>Archive</a>-->  
                 </div>
 
                 <a class="sub-btn"><i class="fas fa-cogs"></i>Setup Categories<i class="fas fa-angle-right dropdown"></i>
                 <div class="sub-menu">
+                  <a href="viewActionType.php"><i class="fas fa-user-tag"></i>Manage Action</a> 
                     <a href="viewDepartmentType.php"><i class="fas fa-plus-circle"></i>Manage Department</a>
-                    <a href="viewDocumentType.php"><i class="fas fa-file"></i>Manage Document Type</a>
                     <a href="viewDesignationType.php"><i class="fas fa-user-tag"></i>Manage Designation</a>  
+                    <a href="viewDocumentType.php"><i class="fas fa-file"></i>Manage Document Type</a>
+
                 </div>
 
                 <a class="sub-btn"><i class="fas fa-users"></i>Employees<i class="fas fa-angle-right dropdown"></i>
@@ -58,9 +60,9 @@
                     <a href="userStatus.php" style="font-size: 15px"><i class="fas fa-user-cog"></i>Manage User's Account</a>
                 </div> 
               </div>
-              <div class="item"><a href="viewDepartment.php"><i class="fas fa-question-circle"></i>Inquiry</a></div>
+              <div class="item"><a href="inquiry_document.php"><i class="fas fa-question-circle"></i>Inquiry</a></div>
               <div class="item"><a href="reports.php"><i class="fas fa-file"></i>Reports</a></div>
-              <div class="item"><a href="sms.php"><i class="fas fa-sms"></i>SMS Messaging</a></div>
+              <div class="item"><a href="sms.php"><i class="fas fa-sms"></i>SMS Notification</a></div>
               <!--<div class="item"><a href="#"><i class="fas fa-history"></i></i>Login History</a></div>-->
               <div class="item">
               </div>

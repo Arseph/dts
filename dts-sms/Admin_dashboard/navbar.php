@@ -2,8 +2,8 @@
   require_once('connection_db/connection.php');
  session_start();
  $username = $_SESSION['username'];
- $firstname = $_SESSION['firstname'];
- $lastname = $_SESSION['lastname'];
+ #$firstname = $_SESSION['firstname'];
+ #$lastname = $_SESSION['lastname'];
 ?>
 <!DOCTYPE html>
 <html>

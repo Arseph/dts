@@ -144,6 +144,9 @@
   .tooltip{
    font-size: 10px;
  }
+ .isNotif{
+  display: none !important;
+ }
 </style>
 
 <!--- Logout Modal Confirmation --->
@@ -208,8 +211,9 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#releasedDocument').html(val.output);
+        $(".badgeReleased").html(val.total);
         if(val.total <= 0) {
-          $(".badgeReleased").addClass('isNotif');  
+          $(".badgeReleased").html('');  
         } else {
           $(".badgeReleased").html(val.total);
           $(".badgeReleased").removeClass('isNotif');
@@ -241,6 +245,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#fileSendAdmin').html(val.output);
+        $(".badgeReceived").html(val.total);
         if(val.total <= 0) {
           $(".badgeReceived").addClass('isNotif');  
         } else {
@@ -251,6 +256,7 @@
       }
     })
     var sum = parseFloat(all) + parseFloat(admin);
+    $(".badgeReceived").html(sum);
     if(sum <= 0) {
       $(".badgeReceived").addClass('isNotif');  
     } else {
@@ -269,6 +275,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#ReceivedReceivedDocument').html(val.output);
+        $(".badgeReceivedReceived").html(val.total);
         if(val.total <= 0) {
           $(".badgeReceivedReceived").addClass('isNotif');  
         } else {

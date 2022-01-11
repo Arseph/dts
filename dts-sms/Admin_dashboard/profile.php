@@ -15,7 +15,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Departmemnt Head | Document Tracking System</title>
+  <title>Admin | Document Tracking System</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="navbar.css">
   <link rel="shortcut icon" type="img/png" href="img/dtslogo.png">
@@ -35,23 +35,23 @@
 
 <div class="main-content">
         <?php
-        if(isset($_SESSION['errorStat'])){
+        if(isset($_SESSION['err'])){
           echo
           "
           <div class='alert alert-danger text-center' style='background-color: #E23C42; color: white;'>
-            ".$_SESSION['errorStat']."
+            ".$_SESSION['err']."
           </div>
           ";
-          unset($_SESSION['errorStat']);
+          unset($_SESSION['err']);
         }
-        if(isset($_SESSION['success1'])){
+        if(isset($_SESSION['ss'])){
           echo
           "
           <div class='alert alert-success text-center' style='background-color: #04A12B; color: white;'>
-            ".$_SESSION['success1']."
+            ".$_SESSION['ss']."
           </div>
           ";
-          unset($_SESSION['success1']);
+          unset($_SESSION['ss']);
         }
       ?>
 <style>
@@ -82,12 +82,13 @@
 
 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
-<div class="wrapper1 bg-white mt-sm-5" style="border: none">
+<div class="wrapper1 bg-white mt-sm-5" style="border: none; height: 400%">
     <h4 class="pb-4 border-bottom">Account Profile</h4>
     <div class="d-flex align-items-start py-3 border-bottom"> 
       <span>
 
 <?php 
+    
     $id = $_SESSION['id'];
     $image_query = mysqli_query($conn,"SELECT imageProfile FROM admin_account WHERE id='$id'");
     while($rows = mysqli_fetch_array($image_query))
@@ -119,15 +120,11 @@ if($result)
     if(mysqli_num_rows($result)>0){
         while($row = mysqli_fetch_array($result)){
             ?>
-            <div class="pl-sm-4 pl-2" id="img-section" style="margin-top: 2%"><b style="margin-left: -10%; font-size: 18px; "><?php echo $firstname; ?> <?php echo $lastname; ?>
-            <?php
-        }
-    }
-}
+            <div class="pl-sm-4 pl-2" id="img-section" style="margin-top: 2%"><b style="margin-left: -10%; font-size: 18px; "><?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?>
+            <p style="margin-left: -10%;"><?php echo $usertype; ?></p></b>
 
-?>
       
-      <p style="margin-left: -10%;"><?php echo $usertype; ?> Head</p></b>
+      
         <!--<center><p><?php echo $username; ?></p></center>-->
       </div>
     </div>
@@ -136,20 +133,7 @@ if($result)
 
     <form method="POST" action="profileFunction.php">
 
-        <?php 
-            $uname = $_SESSION['username'];
-            $firstname = $_SESSION['firstname'];
-            $lastname = $_SESSION['lastname'];
-            #$email = $_SESSION['email'];
-            $sql = "SELECT * FROM admin_account WHERE username = '$uname'";
-            $res = mysqli_query($conn,$sql);
 
-            if ($res)
-            {
-                if(mysqli_num_rows($res)>0){
-                    while($row = mysqli_fetch_array($res)){
-                        //print_r($row['username']);
-                        ?>
 
                         <input type="hidden" name="update_id" value="<?php echo $row['id']; ?>">
                         <div class="frow form-group" style="margin-bottom: -2%;">
@@ -172,10 +156,10 @@ if($result)
                     <div class="frow form-group" style="margin-top: 5%;">
                         <div class="form-inline">
                         <label class="control-label" style="font-size: 14px; margin-right: 5%">Username:</label>
-                        <input style="font-size: 14px; font-weight: 500; padding: 10px; border: none; border-bottom: 1px solid gray; text-align: center; margin-right: 10%; width: 30%; background-color: white " class="form-control rounded-0 unameDisabled" value="<?php echo $username; ?>" name="updateUname" disabled></input>
+                        <input style="font-size: 14px; font-weight: 500; padding: 10px; border: none; border-bottom: 1px solid gray; text-align: center; margin-right: 10%; width: 30%; background-color: white " class="form-control rounded-0 unameDisabled" value="<?php echo $row['username']; ?>" name="updateUname" disabled></input>
 
                         <label class="control-label" style="font-size: 14px; margin-right: 3%;">Phone Number:</label>
-                        <input style="font-size: 14px; font-weight: 500; padding: 10px; border: none; border-bottom: 1px solid gray; text-align: center; width: 30%; background-color: white " class="form-control rounded-0 numDisabled" value="<?php echo $row['phone_number']; ?>"  name="updateNum" disabled></input>
+                        <input style="font-size: 14px; font-weight: 500; padding: 10px; border: none; border-bottom: 1px solid gray; text-align: center; width: 30%; background-color: white " class="form-control rounded-0 numDisabled" value="<?php echo $row['phone_number']; ?>" name="updateNum" disabled></input>
                         </div>
                     </div>
                     <div class="frow form-group" style="margin-top: 5%;">
@@ -187,7 +171,7 @@ if($result)
                     <br>
                     <div class="form-group">
                         <input type="button" class="btn btn-secondary btn-sm discardDisabled" onClick="window.location.href='profile.php'" value="Discard Changes" disabled style="margin-left: 68%; width: 16%; font-size: 12px;">
-                        <input type="submit" name="updateBtn" id="updateBtn" class="btn btn-info btn-sm buttonDisabled" value="Save Changes" disabled style="margin-left: 85%; margin-top: -7.2%; font-size: 12px;">
+                        <input type="submit" name="updateBtn" id="updateBtn" class="btn btn-info btn-sm buttonDisabled" value="Save Changes" disabled style="margin-left: 85%; margin-top: -7%; font-size: 12px;">
                     </div>
 
 

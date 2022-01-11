@@ -20,6 +20,7 @@ $username = $_SESSION['username'];
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="../js/daterangepicker_old/daterangepicker-bs3.css" rel="stylesheet">
   <link href="../js/daterangepicker_old/datepicker3.css" rel="stylesheet">
+
   <style>
     .height10{
       height:10px;
@@ -47,48 +48,11 @@ $username = $_SESSION['username'];
 
   <div class="info">
      
+    <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / Reports</b>
 
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown no-arrow">
-                     <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600; cursor: pointer;">Dashboard</a> /</b>
-                      <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px; font-weight: 600; color: black;"> Inquiry</a>
-                    
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-left"
-                                aria-labelledby="userDropdown" style="border-radius: 0; height: auto; width: 23%;">
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
-                                    Search Departments
-                                </a>
-
-                                <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
-                                  Document Status
-                                </a>
-                       
-                                <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
-                                    Track Document's Route
-                                </a>
-
-                                <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
-                                    Select
-                                </a>
-
-                                <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
-                                    Select
-                                </a>
-
-                                <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
-                                    Select
-                                </a>
-                            </div>
-                    </li>
-              </ul>
   </div>
 </div>
+
 
 <!-----Add Docu CSS---->
   <div class="wrapper">
@@ -110,46 +74,65 @@ $result = $statement->fetchAll();
 ?>
 
 <?php include('addUserModal.php') ?>
-<div class="card shadow" style="width: 73%; margin-left: 25%; border: none; margin-top: 1%;">
+<div class="card" style="width: 73%; margin-left: 24%; border: none; margin-top: 1%;">
 <!---- card header start ---->
-  <div class="card-header">
+  <div class="card-header" style="border: none; background-image: url('img/bgg.jpg'); height: 60px;">
 
   <div class="form-group">
-      <label style="font-size: 13px; font-weight: 550; color: #333333;margin-bottom: -5%;">Search by Departments:</label>
-       <select name="filter" id="filter" class="form-control rounded-0" style="font-size: 12px; width: 40%; height: 35px;" >
-       <option selected="true" style="font-size: 12px;"></option>
-       <?php
-        foreach($result as $row)
-        {
-          echo '<option value="'.$row["department"].'">'.$row["department"].'</option>';  
-        }
-        ?>
-       </select>
        <input type="hidden" name="hidden_details" id="hidden_details" />
-  </div>
-  <div style="width: 35%; margin-left: 42%; margin-right: -6%; margin-top: -51px;">
-     <input type="text" class="form-control" name="date_range" placeholder="Filter your date here..." id="consolidate_date_range">
+
+  <div style="width: 35%; margin-left: 1px; margin-right: -6%; margin-top: 4px;">
+     <input type="text" class="form-control rounded-0" name="date_range" placeholder="Filter your date here..." id="consolidate_date_range" style="font-size: 12px">
   </div>
 
-    <div class="search-box" style="width: 35%; float: right; margin-right: -6%; margin-top: -35px;">
-          <input type="text" id="search" class="form-control rounded-0" placeholder="Search by names" style="font-size: 12px;">
-    </div>
+  <div class="search-box" style="width: 35%; float: right; margin-right: -6%; margin-top: -35px;">
+      <input type="text" id="search" class="form-control rounded-0" placeholder="Search by names" style="font-size: 12px;">
+  </div>
+  </div>
+</div>
 </div>
 <!---- card header end ---->
+<div >
 
-<div class="card-body" style="height: auto; display: fixed;">
-  <div class="row">
-    <table id="userTbl" class="responsive-table table-hover table-striped table-sm m-0" width="100%">
-          <thead style="background-color: #0062CC; color: white; font-size: 12px;">
+<style type="text/css" media="print">
+@media print {
+  body {
+    background: none;
+    -ms-zoom: 1.665;
+  }
+  div.portrait, div.landscape {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+  }
+  div.landscape {
+    transform: rotate(270deg) translate(-276mm, 0);
+    transform-origin: 0 0;
+  }
+}
+</style>
+
+<div class="card" style="width: 73%; margin-left: 24%; margin-top: 1%;">
+  <div class="card-header" style="height: 50px; background-color: white;">
+    <button class="btn btn-info btn-sm" onclick="printDiv('printarea')" style="font-size: 11px;" name="print" id="print" ><i class="fas fa-print"></i> &nbsp;Print Reports</button>
+
+    <button class="btn btn-warning btn-sm" onclick='window.location.reload();' style="font-size: 11px;" ><i class="fas fa-sync-alt"></i> &nbsp;Refresh</button>
+  </div>
+  <div class="card-body" style="height: auto; display: fixed;">
+  <div class="row" id="printarea">
+    <p style="font-weight: 600; margin-left: 37.5%; ">DTS TRANSACTION REPORTS</p>
+    <p style="font-weight: 500; margin-left: 46%; margin-top: -1.5%; font-size: 14px;"> <span id='myId'></span></p>
+    <table id="userTbl" class="responsive-table table-hover table-bordered table-sm m-0" width="100%">
+          <thead style="color: black; font-size: 12px;">
             <tr class="myHead" style="height: 35px">
-              <th>TRACK NO</th>
-              <th>FILE NAME</th>
-              <th>DOCUMENT TYPE</th>
-              <th>CREATED BY</th>
-              <th>DEPARTMENT</th>
-              <th>DATE CREATED</th>
-              <th>RECEIVED BY</th>
-              <th>DATE RECEIVED</th>
+              <th width="15px">DATE CREATED</th>
+              <th width="10px">TRACK NO.</th>
+              <th width="20px">CREATED BY</th>
+              <th width="18px">DOCUMENT TYPE</th>
+              <th width="18px">FILE NAME</th>
+              <th width="15px">DATE RECEIVED</th>
+              <th width="20px">RECEIVED BY</th>
             </tr>
           </thead>
           <tbody id="reportTable">
@@ -157,7 +140,12 @@ $result = $statement->fetchAll();
         </table>
       </div>
     </div>
+</div>
+</div>
 
+<style>
+
+</style>
 <script src="jquery/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="datatable/jquery.dataTables.min.js"></script>
@@ -231,6 +219,26 @@ $(document).ready(function(){
     $(this).remove(); 
     });
    }, 3000);
+
+ //print table
+function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
+var date = new Date(); 
+var dd = date.getDate(); 
+var mm = date.getMonth() + 1; 
+var yyyy = date.getFullYear(); 
+var newDate = mm + "/" + dd + "/" +yyyy; 
+var p = document.getElementById("myId"); 
+p.innerHTML = newDate; 
 </script> 
 
 </body>

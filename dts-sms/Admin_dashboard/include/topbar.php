@@ -93,17 +93,24 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <?php  
-                    include_once('connection_db/connection.php');
-                    $id = $_SESSION['id'];
-                    $image_query = mysqli_query($conn,"SELECT imageProfile FROM admin_account WHERE id='$id'");
-                    while($rows = mysqli_fetch_array($image_query))
-                    {
-                        $imageProfile = $rows['imageProfile'];
-                    ?>
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><img class="user" src="img/<?php echo $imageProfile; ?>" onerror="this.src='img/noimage2.png';this.onerror='';" alt="Avatar">&nbsp;&nbsp;<?php echo $firstname; ?> <?php echo $lastname; ?> ( Administrator )</span>
-                    <?php
-                   }
+                <?php  
+                  include_once('connection_db/connection.php');
+                  $id = $_SESSION['id'];
+                  $sql = "SELECT * FROM admin_account WHERE id='$id'";
+                  $result = mysqli_query($conn,$sql);
+
+
+                  if($result)
+                  {
+                    if(mysqli_num_rows($result)>0){
+                      while($row = mysqli_fetch_array($result)){
+                          $imageProfile = $row['imageProfile'];
+                        ?>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><img class="user" src="img/<?php echo $imageProfile; ?>" onerror="this.src='img/noimage2.png';this.onerror='';" alt="Avatar">&nbsp;&nbsp;<?php echo $row['firstname']; ?> <?php echo $row['lastname']; ?> ( Administrator )</span>
+                        <?php
+                      }
+                    }
+                  }
                   ?>
                      <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 " style="font-size: 13px"><img class="user" src="<?php echo $row['imageProfile']; ?>" onerror="this.src='img/noimage2.png';this.onerror='';" >&nbsp;&nbsp;<?php echo $firstname; ?> <?php echo $lastname; ?> ( Administrator )</span> -->
                     </a>
@@ -154,6 +161,9 @@
   .tooltip{
    font-size: 10px;
  }
+ .isNotif{
+  display: none !important;
+ }
 </style>
 
 <!--- Logout Modal Confirmation --->
@@ -171,7 +181,7 @@
       </div>
       <div class="modal-footer" style="border: none; margin-top: -3%;">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 12px; width: 20%;margin-top: -1%; height: 35px; font-size: 13px; border-radius: 30px; border: none; margin-left: -28%"> No</button>
-        <button type="button" class="btn btn-primary" onclick="location.href = 'logout.php';" data-dismiss="modal" style="font-size: 12px; width: 20%;margin-top: -1%; height: 35px; font-size: 13px; border-radius: 30px;  border: none; margin-right: 28%"> Yes</button>
+        <button type="button" class="btn btn-primary" onclick="location.href = '../logout.php';" data-dismiss="modal" style="font-size: 12px; width: 20%;margin-top: -1%; height: 35px; font-size: 13px; border-radius: 30px;  border: none; margin-right: 28%"> Yes</button>
       </div>
     </div>
   </div>
@@ -203,6 +213,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $("#docuReceived").html(val.output);
+        $(".badgedocuReceived").html(val.total);
         if(val.total <= 0) {
           $(".badgedocuReceived").addClass('isNotif');  
         } else {
@@ -223,6 +234,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#fileOutgoing').html(val.output);
+        $(".badgefileOutgoing").html(val.total);
         if(val.total <= 0) {
           $(".badgefileOutgoing").addClass('isNotif');  
         } else {
@@ -243,6 +255,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#deptSEnd').html(val.output);
+        $(".badgedeptSend").html(val.total);
         if(val.total <= 0) {
           $(".badgedeptSend").addClass('isNotif');  
         } else {
@@ -263,11 +276,12 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#releasedDocument').html(val.output);
+        $(".badgeReleased").html(val.total);
         if(val.total <= 0) {
-          $(".badgeReleased").addClass('isNotif');  
+          $(".badgeReleased").css("display", "none");  
         } else {
           $(".badgeReleased").html(val.total);
-          $(".badgeReleased").removeClass('isNotif');
+          $(".badgeReleased").css("display", "block");
         }
       }
     })
@@ -283,6 +297,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#fileSend').html(val.output);
+        $(".badgeReceived").html(val.total);
         if(val.total <= 0) {
           $(".badgeReceived").addClass('isNotif');  
         } else {

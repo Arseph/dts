@@ -50,7 +50,7 @@ if(mysqli_num_rows($result) > 0)
         $_SESSION['success1'] = 'Welcome '.$_SESSION['usertype'];
 }
    else{
-         $_SESSION['error'] = 'Invalid username and/or password';
+         $_SESSION['error'] = 'Invalid username and/or password.';
          header("Location: index.php");
         //this is where we put our 3 attempt limit
         $_SESSION['attempt'] += 1;

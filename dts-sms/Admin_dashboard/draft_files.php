@@ -113,7 +113,7 @@
 
 <!-----Drafts Table----->
 <?php include('add_modal.php') ?>
-<form  action="add_document_code.php" method="POST" enctype="multipart/form-data" class="wrapper">
+
 <div class="card shadow" style="width: 73%; margin-left: 25%; border: none; margin-top: 1%">
   <div class="card-header" style=" height: auto; ">
     <div class="row">
@@ -161,7 +161,7 @@
                     <input type='checkbox' class='delete_checkbox' name='user_delete_id[]' value=".$row["id"]." />
                   </td>
                   <td style='text-align: center;'>".$row['tracking_no']."</td>
-                  <td style='text-align: center;'>".$row['file_name']."</td>
+                  <td style='text-align: center;' id='".$row['tracking_no']."'>".$row['file_name']."</td>
                   <td style='text-align: center;'>".$row['file_description']."</td>
                   <td style='text-align: center;'>".$row['type_document']."</td>
                   <td style='text-align: center;'>".$row['select_date']."</td>
@@ -172,7 +172,7 @@
                     <a href='#delete_".$row['id']."' class='btn btn-danger  btn-sm m-0' role='button' data-toggle='modal' style='font-size: 11px'><i class='fa fa-trash'></i></a>
 
 
-                    <button id='sendButton' type='button' class='btn btn-primary btn-sm m-0 ".$dis."' data-toggle='modal' data-target='#send_modal_".$row['id']."' style='font-size: 11px'><i class='fas fa-share-square'></i></button>
+                    <button id='sendButton' type='button' class='btn btn-primary btn-sm m-0 ".$dis."' data-toggle='modal' data-target='#send_modal' style='font-size: 11px' onclick='trck(".$row['tracking_no'].")'><i class='fas fa-share-square'></i></button>
                   </td>
                 </tr>";
                 include('edit_delete_modal.php'); ####send document modal###
@@ -198,7 +198,6 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" name="sendDocu" action="edit.php">
         <div class="form-group">
         <table id="recUser" class="responsive-table table-hover table-striped table-sm m-0" width="100%">
           <thead style="background-color: #A8A8A8; color: white; font-size: 12px;">
@@ -239,8 +238,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 11px; height: 30px;margin-top: -1%">Cancel</button>
-         <button type="submit" name="submitDocu" class="btn btn-primary" style="font-size: 11px; height: 30px;margin-top: -1%">Done</button>
-       </form>
+         <button type="button" name="submitDocu" class="btn btn-primary" style="font-size: 11px; height: 30px;margin-top: -1%" onclick="sendAll()">Done</button>
       </div>
 
     </div>
@@ -250,7 +248,6 @@
 
 
 </div>
-</form>
 <style>
     .btnDelete
     {
@@ -397,6 +394,10 @@ $(document).ready(function(){
 
   var sendid = [];
   var receiber = [];
+  var final = '';
+  var fnames = '';
+  var tarak = '';
+  var file_name = '';
   function sendDocu(id) {
     var idis = "send_btn_" + id;
     document.getElementById(idis).disabled = true;
@@ -404,13 +405,34 @@ $(document).ready(function(){
     var names = $("#"+id).text();
     receiber.push(names);
 
-    var final = sendid.join(',');
-    var fnames = receiber.join('|');
-    $("#receiving_name").val(fnames);
-    $("#send_receiving").val(final);
+    final = sendid.join(',');
+    fnames = receiber.join('|');
+
   }
   function sendAll() {
-    $('#submitDocu').click();
+    $.ajax({
+       type: "POST",
+       url: 'send_draft.php',
+       data: {
+          receiving_name: fnames,
+          send_receiving: final,
+          tracking_no: tarak,
+          file_name: file_name
+       },
+       success: function(data){
+       console.log(data);
+       window.location.reload();
+       },
+       error: function(xhr, status, error){
+       console.error(xhr);
+       }
+    });
+  }
+
+  function trck(trak) {
+    tarak = trak
+    file_name = document.getElementById(trak).innerHTML;
+    console.log(file_name)
   }
 
 function getImagePreview(event)

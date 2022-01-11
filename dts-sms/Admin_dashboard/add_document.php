@@ -10,7 +10,7 @@
          <?php
             $conn = mysqli_connect("localhost","root","","documenttrackingsystem_db");
 
-            $query = "SELECT * FROM tbl_typedocument WHERE department = '$username' order by type_document asc";
+            $query = "SELECT * FROM tbl_typedocument where department = '$username' order by type_document asc";
             $result = mysqli_query($conn, $query);
             $options = "";
             while($row2 = mysqli_fetch_array($result))
@@ -26,10 +26,10 @@
                 $options1 = $options1."<option>$row2[1]</option>";
             }
 
-            $query = "SELECT * FROM tbl_action order by action asc";
-            $result = mysqli_query($conn, $query);
+            $query = "SELECT * FROM tbl_action where department = '$username' order by action asc";
+            $result2 = mysqli_query($conn, $query);
             $options2 = "";
-            while($row2 = mysqli_fetch_array($result))
+            while($row2 = mysqli_fetch_array($result2))
             {
                 $options2 = $options2."<option>$row2[1]</option>";
             }
@@ -118,10 +118,16 @@
     margin-bottom: 15px;
     border-bottom: 1px solid #2F5597;
   }
-  .small {
+  .small1 {
     font-style: italic;
     font-weight: 550;
     color: white;
+  }
+  .btnReset
+  {
+    font-size: 11px;
+    margin-left: 84%;
+    margin-bottom: 1%;
   }
 </style>
 
@@ -130,12 +136,12 @@
 
 
   <div class="card shadow" style="width: 60%; margin-left: 30%; border: none; margin-top: 1%">
-    <div class="card-header" style="height: 39px; background-color: #0181CA;">
-      <small class="small">Fields with </small><small style="color: red;">*</small><small class="small"> are required.</small>
+    <div class="card-header" style="height: 43px; border: none; background-color: #0181CA;">
+      <small class="small1">Fields with </small><small style="color: red;">*</small><small class="small1"> are required.</small>
     </div>
     <div class="card-body">
       <form action="add_document_code.php" method="POST" enctype="multipart/form-data" class="wrapper">
-
+      <input type="reset" class="btnReset btn-danger btn-sm" value="Reset Form"/>
             <div class="form-inline">
               <label class="label">Tracking Number: </label>
               <div class="tracking_no col-sm-5">
@@ -166,7 +172,7 @@
             <div class="form-inline">
               <label class="label"><small style="font-size: 14px; font-weight: 550; color: red;">*</small>&nbsp;Add Attachment: </label>
               <div class="myfile col-sm-5">
-                <input type="file" class="upload-box form-control rounded-0" name="myfile" id="myfile" style="font-size: 13px;  background-color: #F0F0F0; width: 150%;">
+                <input type="file" class="upload-box form-control rounded-0" accept=".gif,.jpg,.jpeg,.png,.doc,.docx,.pdf,.xlsx, .xls, .csv" name="myfile" id="myfile" style="font-size: 13px;  background-color: #F0F0F0; width: 150%;" required>
               </div>
               <p class="format">
                 - Allowed Formats: PDF, GIF, JPG, PNG, DOCX<br>
@@ -178,14 +184,14 @@
              <div class="form-inline">
               <label class="label"><small style="font-size: 14px; font-weight: 550; color: red;">*</small>&nbsp;File Name: </label>
               <div class="file_name col-sm-5">
-                <input type="text" class="form-control rounded-0" name="file_name" style="font-size: 13px;  background-color: #F0F0F0; width: 150%;" onkeyup = "Validate(this)" id="txt">
+                <input type="text" class="form-control rounded-0" onchange='saveValue(this);' name="file_name" id="file_name" title="A file name cannot contain any of the following characters: \ / : * ? < > | " style="font-size: 13px;  background-color: #F0F0F0; width: 150%;" onkeyup = "Validate(this)">
               </div>
             </div><br> 
   
             <div class="form-inline">
               <label class="label"><small style="font-size: 14px; font-weight: 550; color: red;">*</small>&nbsp;Message/Description: </label>
               <div class="file_description col-sm-5">
-                <textarea class="form-control rounded-0" name="file_description" placeholder="Write something.." style="font-size: 13px;  background-color: #F0F0F0; width: 150%; height: 130px;"></textarea>
+                <textarea class="form-control rounded-0" onchange='saveValue(this);' name="file_description" id="file_description"  placeholder="Write something.." style="font-size: 13px;  background-color: #F0F0F0; width: 150%; height: 130px;"></textarea>
               </div>
             </div><br>
 
@@ -338,10 +344,12 @@
       <div class="modal-content rounded-0 shadow" style="background-color: white; margin-top: 20%; border: none;">
        <div class="container"></div>
         <div class="modal-body" class="modal fade">
-        <form method="POST" action="addActionFunction.php">
+        <form method="POST" id="addDocu">
           <div class="container-fluid">
               <div class="form-group">
                 <br>
+                  <small id="msg" style="font-style: italic; color: blue;"></small>
+                  <br>
                   <label style="font-size: 13px; margin-bottom: 4%;">&nbsp;Add Document Type: &nbsp;</label>
               <input  class="form-control" type="hidden" placeholder="Enter here" name="department_type" id = "department_type" value="<?php echo $username;?>" style="font-size: 12px;" required /> 
 
@@ -349,8 +357,9 @@
               </div>
           </div>
           <div class="modal-footer" style="height: auto;">
-          <a href="#" data-dismiss="modal" class="btn btn-secondary" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-left: -24%"><i class="fa fa-times"></i> Cancel</a>
-          <button type="submit" name="add_type" class="btn btn-primary"  style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%"><i class="fas fa-save"></i> Save</button>  
+          <a href="<?php $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-left: -24%"> Done</a>
+          <!--<button type="submit" id="add_type" name="add_type" class="btn btn-primary"  style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%"><i class="fas fa-save"></i> Save</button>  -->
+          <input class="btn btn-primary" type="button" name="add_type" id="add_type" value="Save" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%">
           </div>
           </form>
         </div>
@@ -388,17 +397,24 @@
       <div class="modal-content rounded-0 shadow" style="background-color: white; margin-top: 20%; border: none;">
        <div class="container"></div>
         <div class="modal-body" class="modal fade">
-        <form method="POST" action="addActionFunction.php">
+        <form method="POST" id="formActionID">
           <div class="container-fluid">
               <div class="form-group">
                 <br>
+                <small id="msg1" style="font-style: italic; color: blue;"></small>
+                  <br>
                   <label style="font-size: 13px; margin-bottom: 4%;">&nbsp;Add Action: &nbsp;</label>
+              <input  class="form-control" type="hidden" placeholder="Enter here" name="action_ID" id = "action_ID" value="<?php echo $username;?>" style="font-size: 12px;" required />
+              
               <input required name="addAction" type="text" class="form-control rounded-0" placeholder="Enter here" id="addAction" required style="font-size: 13px;margin-top: -3%;"/>
               </div>
           </div>
           <div class="modal-footer" style="height: auto;">
-          <a href="#" data-dismiss="modal" class="btn btn-secondary" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-left: -24%"><i class="fa fa-times"></i> Cancel</a>
-          <button type="submit"  name="add_action" class="btn btn-primary"  style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%"><i class="fas fa-save"></i> Save</button>  
+          <a href="<?php $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-left: -24%"><i class="fa fa-times"></i> Done</a>
+
+          <input class="btn btn-primary" type="button" name="add_action" id="add_action" value="Save" style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%">
+
+          <!--<button type="submit"  name="add_action" class="btn btn-primary"  style="font-size: 12px; width: 25%;margin-top: -1%; height: 30px; font-size: 13px; border: none; margin-right: 24%"><i class="fas fa-save"></i> Save</button>-->  
           </div>
           </form>
         </div>
@@ -537,8 +553,8 @@ function getImagePreview(event)
 
 
  // validates text only
-function Validate(txt) {
-    txt.value = txt.value.replace(/[^a-zA-Z-'\n\rA-Za-z\s-_-\%\$\.\,\@\-0-9]]+/g, '');
+function Validate(file_name) {
+    file_name.value = file_name.value.replace(/[\\"*:".\/<>?|`¬\]\[]/g,'');
 }
 
   $(document).ready(function(){
@@ -570,4 +586,53 @@ function addCategories()
   //prevent from submit code
   return false;
 }
+
+//document type save without refresh
+$(document).ready(function(){
+    $('#add_type').click(function(){
+        var data = $('#addDocu').serialize()+'&add_type=add_type';
+        $.ajax({
+          url:'addActionFunction.php',
+          type:'post',
+          data:data,
+          success:function(response){
+            $('#msg').text(response);
+            $('#department_type').text('');
+          }
+        });
+    });
+}); //end
+
+//action save without refresh
+$(document).ready(function(){
+    $('#add_action').click(function(){
+        var data = $('#formActionID').serialize()+'&add_action=add_action';
+        $.ajax({
+          url:'addActionFunction.php',
+          type:'post',
+          data:data,
+          success:function(response){
+            $('#msg1').text(response);
+            $('#addDocType').text('');
+          }
+        });
+    });
+}); //end
+
+document.getElementById("file_name").value = getSavedValue("file_name");
+document.getElementById("file_description").value = getSavedValue("file_description");
+
+function saveValue(e)
+{
+  var id = e.id;
+  var val = e.value;
+  localStorage.setItem(id, val);
+}
+
+function getSavedValue (v){
+  if (!localStorage.getItem(v)) {
+    return "";
+  }
+  return localStorage.getItem(v);
+} //end
 </script>

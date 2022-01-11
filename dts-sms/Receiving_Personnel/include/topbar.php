@@ -93,6 +93,9 @@
     .tooltip{
    font-size: 10px;
  }
+ .isNotif{
+  display: none !important;
+ }
 </style>
 
 <!--- Logout Modal Confirmation --->
@@ -135,6 +138,7 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#receiveDocument').html(val.output);
+        $(".badgereceived").html(val.total);
         if(val.total <= 0) {
           $(".badgereceived").addClass('isNotif');  
         } else {

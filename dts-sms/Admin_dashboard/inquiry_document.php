@@ -79,7 +79,45 @@
 </style>
 
   <div class="info">
-    <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / Inquiry Documents</b>
+               <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown no-arrow">
+                     <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600; cursor: pointer;">Dashboard</a> /</b>
+                      <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 15px; font-weight: 600; color: black;"> Inquiry</a>
+                    
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-left"
+                                aria-labelledby="userDropdown" style="border-radius: 0; height: auto; width: 23%;">
+                                <a class="dropdown-item" href="viewDepartment.php" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
+                                    Search Departments
+                                </a>
+
+                                <div class="dropdown-divider" style="color: gray;"></div>
+                                <a class="dropdown-item" href="inquiry_document.php" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
+                                  Track Documents
+                                </a>
+                       
+                                <!--<div class="dropdown-divider" style="color: gray;"></div>
+                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
+                                    Track Document's Route
+                                </a>
+
+                                <div class="dropdown-divider" style="color: gray;"></div>
+                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
+                                    Select
+                                </a>
+
+                                <div class="dropdown-divider" style="color: gray;"></div>
+                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
+                                    Select
+                                </a>
+
+                                <div class="dropdown-divider" style="color: gray;"></div>
+                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
+                                    Select
+                                </a>
+                            </div>-->
+                    </li>
+              </ul>
   </div>
 </div>
 
@@ -92,16 +130,23 @@
 <div id="targetLayer" class="btn btn-success" style="display:none;width:100%;margin-bottom: 10px;"></div>
 <div class="card shadow" style="width: 73%; margin-left: 25%; border: none; margin-top: 1%;">
   <div class="card-header" style="height:  85px; border: none;">
-    <small style="font-size: 11px; font-weight: 550; color: #2B2B2B; font-style: italic;">Inquire Documents</small>
+    <small style="font-size: 11px; font-weight: 550; color: #2B2B2B; font-style: italic;"><i class='fas fa-chart-line'></i> &nbsp;TRACK DOCUMENTS   </small>
     <div class="row">
-      <div class="col-md-4">
+      <!--<div class="col-md-4">
         <a href="<?php $_SERVER['PHP_SELF']; ?>" class="refresfMdl btn btn-primary rounded-0" style="font-size: 12px;"><i class="fas fa-sync-alt"></i> &nbsp;Refresh</a>
-      </div>
-      <div class="col-md-8">
-        <input type="text" class="search form-control rounded-0" placeholder="Search documents" s style="font-size: 12px; margin-left: 20%;">
-      </div>
+      </div>-->
+        <div class="input-group" style="width: 100%; margin-top: -1%;">
+            <input type="text" class="search form-control" placeholder="Track documents..." style="font-size: 12px; margin-left: 65%; width: 10%; ">
+            <span class="input-group-append" style="height: 35px; ">
+            <a class="btn btn-outline-secondary">
+                <i class="fa fa-search"></i>
+            </a>
+            </span>
+        </div>
+      <!--<div class="col-md-8">
+        <input type="text" class="search form-control rounded-0" placeholder="Track documents..."  style="font-size: 12px; margin-left: 55%; width: 45%;">
+      </div>--->
     </div>
-      
   </div>
   <div class="card-body" style="height: auto; display: fixed;">
   <div class="row">
@@ -116,11 +161,11 @@
             </tr>
             <tr class="myHead" style="height: 35px">
               <th style="width: 20%; text-align: center; font-size: 11px;"><i class="fa fa-search" style="color: gray;"></i> &nbsp;TRACKING NO.</th>
-              <th style="width: 20%; text-align: center; font-size: 11px;"><i class="fa fa-file" style="color: gray;"></i> &nbsp;FILE NAME</th>
+              <th style="width: 25%; text-align: center; font-size: 11px;"><i class="fa fa-file" style="color: gray;"></i> &nbsp;FILE NAME</th>
               <!--<th style="width: 18%; text-align: center; font-size: 11px;"><i class="fa fa-envelope-open-text" style="color: gray;"></i> &nbsp;MESSAGE/DESCRIPTION</th>-->
               <th style="width: 20%; text-align: center; font-size: 11px;"><i class="fas fa-user" style="color: gray;"></i> &nbsp;CREATED BY:</th>
               <th style="width: 20%; text-align: center; font-size: 11px;"><i class="fa fa-calendar" style="color: gray;"></i> &nbsp;DATE & TIME CREATED</th>
-              <th style="text-align: center; font-size: 10px;">MORE</th>
+              <th style="text-align: center; font-size: 10px; width: 20%;">ACTION</th>
             </tr>
           </thead>
           <tbody>
@@ -139,26 +184,10 @@
                   <td style='text-align: center;'>".$row['select_date']."
                   <div><time class='timeago' datetime='".$row['select_date']."' style='font-size: 11px; color: blue'></time></div>
                   </td>
-                  
+                  <td style='text-align: center;'><a href='#Track_".$row["tracking_no"]."' class='btn btn-warning btn-sm m-0' data-toggle='modal' style='font-size: 12px;'> <i class='fas fa-chart-line fa-sm fa-fw mr-2 text-gray-400'></i>Track</a></td>
                   <td style='text-align: center; font-size: 11px;'>
                   
-                    <a class='dropdown' href='#' id='userDropdown' role='button'
-                       data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='text-decoration: none; color: #666666'><span style='font-size: 15px; cursor: pointer;'><i class='fas fa-ellipsis-h'></i></span></a>
-
-                            <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in'
-                                aria-labelledby='userDropdown'>
-                                <a class='dropdown-item' href='../download.php?file_name=".$row['attach_file']."' style='color: gray; font-size: 14px'>
-                                    <i class='fas fa-download fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray;'></i>
-                                    Download
-                                </a>
-                                <a class='dropdown-item' href='#moreDetails_".$row["tracking_no"]."' class='btn btn-info btn-sm m-0' data-toggle='modal' style='color: gray; font-size: 14px'>
-                                    <i class='fas fa-info-circle fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray; font-size: 14px'></i>
-                                  More Details
-                                </a>
-                                <a class='dropdown-item' href='#Track_".$row["tracking_no"]."' class='btn btn-info btn-sm m-0' data-toggle='modal' style='color: gray; font-size: 14px'>
-                                    <i class='fas fa-chart-line fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray; font-size: 14px'></i>
-                                  Track
-                                </a>
+                    
                        
                             </div>
                   
@@ -174,7 +203,24 @@
       </div>
    </div>
 
-<!-----Add Docu CSS---->
+<!-----Add Docu CSS
+    <a class='dropdown' href='#' id='userDropdown' role='button'
+                       data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' style='text-decoration: none; color: #666666'><span style='font-size: 15px; cursor: pointer;'><i class='fas fa-ellipsis-h'></i></span></a>
+
+                            <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in'
+                                aria-labelledby='userDropdown'>
+                                <a class='dropdown-item' href='../download.php?file_name=".$row['attach_file']."' style='color: gray; font-size: 14px'>
+                                    <i class='fas fa-download fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray;'></i>
+                                    Download
+                                </a>
+                                <a class='dropdown-item' href='#moreDetails_".$row["tracking_no"]."' class='btn btn-info btn-sm m-0' data-toggle='modal' style='color: gray; font-size: 14px'>
+                                    <i class='fas fa-info-circle fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray; font-size: 14px'></i>
+                                  More Details
+                                </a>
+                                <a class='dropdown-item' href='#Track_".$row["tracking_no"]."' class='btn btn-info btn-sm m-0' data-toggle='modal' style='color: gray; font-size: 14px'>
+                                    <i class='fas fa-chart-line fa-sm fa-fw mr-2 text-gray-400' style='color: lightgray; font-size: 14px'></i>
+                                  Track
+                                </a>---->
   <div class="wrapper">
     <?php include_once"css/addDocuStyle.css"; ?>
   </div>

@@ -133,10 +133,10 @@
 
 
 <div class="modal fade" id="Track_<?php echo $row['tracking_no']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog " style="max-width: 60%;">
+    <div class="modal-dialog rounded-0" style="max-width: 70%; border: none;">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #F5F5F5;">      
-              <h4 class="modal-title" style="font-size: 16px; font-weight: 550; font-style: initial; color: gray;"><span><i class='fas fa-info-circle' style='color: lightgray; font-size: 16px'></i></span> &nbsp;Track Document</h4>
+            <div class="modal-header" style="background-color: #F5F5F5; height: 40px;">      
+              <h4 class="modal-title" style="font-size: 14px; font-weight: 550; font-style: initial; color: gray;"><span><i class='fas fa-info-circle' style='color: lightgray; font-size: 16px'></i></span> &nbsp;Document Status</h4>
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: red; font-size: 14px">Done</button>
              </div>
             <div class="modal-body">
@@ -144,12 +144,12 @@
               <?php
               echo 
               "
-              <div class='row'>
+              <div class='row' style='margin-bottom: -3%;'>
                 <div class='col-sm-6'>
-                  <p>TRACKING NO:<label>".$row['tracking_no']."</label></p>
+                  <p style='font-size: 13px; font-weight: 600'>TRACKING NO: &nbsp;<label style=' font-weight: 500;'>".$row['tracking_no']."</label></p>
                 </div>
                 <div class='col-sm-6'>
-                  <p>Created By:<label>".$row['fullname']."</label></p>
+                  <p style='font-size: 13px; font-weight: 600'>CREATED BY: &nbsp;<label style=' font-weight: 500;'>".$row['fullname']." (".$row['department']." Head)</label></p>
                 </div>
               </div>
               ";
@@ -159,31 +159,33 @@
               $queryin = $conn->query($sqlin);
               echo "
               <div class='row'>
-              <div class='col-sm-6' style='border-radius: 25px; border: 2px solid #73AD21; padding: 20px; width: 400px; '>
-              <h4>Document Released To:</h4>
+              <div class='col-sm-6' style='border: none; background-color: #ECECEC; padding: 15px; width: 400px;'>
+              <p style='font-size: 14px; font-weight: bold; text-align: center;'>RELEASE DOCUMENTS</p><hr>
               ";
               while($rowTrack = $queryin->fetch_assoc()){
-                $desc = $rowTrack['descr'] ? "<a>Released To: <label>".$rowTrack['descr']."</label></a>" : "";
+                $desc = $rowTrack['descr'] ? "<a style='font-size: 13px; font-weight: 600'>Released To: <label style='font-weight: 500'>".$rowTrack['descr']."</label></a>" : "";
                 echo "
-                <a>Releaser Name: <label>".$rowTrack['fullname']."</label></a>
-                <a>Status: <label>".$rowTrack['statDocu']."</label></a><br>
+                <a style='font-size: 13px; font-weight: 600'>Releaser Name: <label style='font-weight: 500'>".$rowTrack['fullname']."</label></a><br>
+                <a style='font-size: 13px; font-weight: 600'>Document Status: <label style='color: green; font-weight: 500'>".$rowTrack['statDocu']."</label></a><br>
+                
                 ".$desc."
                 <hr>
                 ";
               }
               echo "
               </div>
-              <div class='col-sm-6' style='border-radius: 25px; border: 2px solid #73AD21; padding: 20px; width: 400px; '>
-              <h4>Document Received By:</h4>
+              <div class='col-sm-6' style='border: none; background-color: #ECECEC; padding: 15px; width: 400px;'>
+              <p style='font-size: 14px; font-weight: bold; text-align: center;'>RECEIVE DOCUMENTS</p><hr>
               ";
               $sqlRec = "SELECT file_upload.*, status_document.status as statDocu, register.*, status_document.description as descr from file_upload inner join status_document on file_upload.tracking_no = status_document.tracking_no INNER JOIN register ON register.id = status_document.user_id where status_document.tracking_no = '".$row['tracking_no']."' and usertype = 'Receiving Officer'";
               //use for MySQLi-OOP
               $queryRec = $conn->query($sqlRec);
                 while($rowTrackRec = $queryRec->fetch_assoc()){
-                $desc = $rowTrackRec['descr'] ? "<a>Releaser: <label>".$rowTrackRec['descr']."</label></a>" : "";
+                $desc = $rowTrackRec['descr'] ? "<a style='font-size: 13px; font-weight: 600'>Releaser: <label style='font-weight: 500'>".$rowTrackRec['descr']."</label></a>" : "";
                 echo "
-                <a>Receiver Name:<label>".$rowTrackRec['fullname']."</label></a>
-                <a>Status:<label>".$rowTrackRec['statDocu']."</label></a><br>
+                <a style='font-size: 13px; font-weight: 600'>Receiver Name: <label style='font-weight: 500'>".$rowTrackRec['fullname']." (".$rowTrackRec['department'].")</label></a><br>
+                <a style='font-size: 13px; font-weight: 600'>Document Status: <label style='color: blue; font-weight: 500'>".$rowTrackRec['statDocu']."</label></a><br>
+
                 ".$desc."
                 <hr>
                 ";

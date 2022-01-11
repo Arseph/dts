@@ -7,8 +7,7 @@ session_start();
 $department = $_SESSION['department'];
 $_SESSION['releaser_id_daw'] = '';
 if( isset($_POST['seen']) ){
-	$seen = $_POST['seen'];
-	$sql = "UPDATE notif_head_receive_receive as Gone, register as Userss SET Gone.status = '1' where Gone.receiver_id = Userss.id and Userss.department = '$department'";
+	$sql = "UPDATE notif_head_receive_receive as Gone, register as Userss SET Gone.status = '1' where Gone.receiver_id = Userss.id";
         $connect->query($sql);
 }
 

@@ -35,7 +35,7 @@ $username = $_SESSION['username'];
         if(isset($_SESSION['err'])){
           echo
           "
-          <div class='alert alert-danger text-center'>
+          <div class='alert alert-danger text-center' style='background-color: #E23C42; color: white;'>
             ".$_SESSION['err']."
           </div>
           ";
@@ -44,7 +44,7 @@ $username = $_SESSION['username'];
         if(isset($_SESSION['ss'])){
           echo
           "
-          <div class='alert alert-success text-center'>
+          <div class='alert alert-success text-center' style='background-color: #04A12B; color: white;'>
             ".$_SESSION['ss']."
           </div>
           ";

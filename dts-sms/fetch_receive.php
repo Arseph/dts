@@ -8,7 +8,7 @@ $id = $_SESSION['id'];
 $_SESSION['releaser_id_daw'] = '';
 if( isset($_POST['seen']) ){
 	$seen = $_POST['seen'];
-	$sql = "UPDATE notif_receive SET status = '1' and receiver_id = '$id'";
+	$sql = "UPDATE notif_receive SET status = '1' where receiver_id = '$id'";
         $connect->query($sql);
 }
 

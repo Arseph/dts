@@ -85,13 +85,18 @@
 
     <!-- Header -->
     <header id="header" class="header" style="background-color: none;">
+        <label style="font-size: 25px; font-weight: 500; color: white; margin-left: 40%; margin-top: 7%;">Document Tracking System</label>
         <div class="header-content">
+
             <div class="container">
                 <form method="POST" onsubmit="required()" name="form1">
-                  <div class="card shadow" style="width:380px; margin-top: -4%;margin-left: 35%; border: none">
+                  <div class="card shadow rounded-0" style="width:380px; margin-top: -15%;margin-left: 35%; border: none">
 
-                  <div class="card-header" style="height: 40px; background-color: #3993DE; border: none;">
-                     <h6 style="text-align: center; font-size: 15px; margin-top: -1%; color: #fff; text-shadow: 2px 2px 1px #2679D3;"><i class="fas fa-user"></i> &nbsp;Employee Log in</h6>
+                  <div class="card-header" style="background-color: white; border: none;">
+                     <!--<h6 style="text-align: center; font-size: 15px; margin-top: -1%; color: #fff; text-shadow: 2px 2px 1px #2679D3;"><i class="fas fa-user"></i> &nbsp;Employee Log in</h6>-->
+
+                     <img src="img/dtslogo.png" width="110px" height="100px" style="margin-left: 35%; margin-top: 2%; margin-bottom: -5%">
+                     <h6 style="text-align: center; font-size: 15px; margin-top: 5%; "> &nbsp;DTS Login</h6>
 
                       <?php
                           if(isset($_SESSION['error'])){
@@ -111,9 +116,9 @@
                   </div>
 
                     <div class="card-body" style="height: auto; background-color: white;">
-                      <div class="container" style="margin-top: 6%">
+                      <div class="container" style="margin-top: -5%">
                         <div class="form-group input-icons" >
-                          <i class="fa fa-user-circle icon"></i>
+                          <!--<i class="fa fa-user-circle icon"></i>-->
                           <input type="type" name="username" class="form-control fields" placeholder="Username" style="width: 100%; height: 45px; border: 1.2px solid #0062CC; background-color: none; font-size: 14px;" <?php echo $disable; ?> required>
                         </div>
                         <div class="form-group input-icons" >
@@ -129,13 +134,13 @@
                       </div>
                     </div>
 
-                    <div class="card-footer" style="height: 40px; background-color: #3993DE; border: none;">
+                    <!--<div class="card-footer" style="height: 40px; background-color: #3993DE; border: none;">
                       <a href="http://localhost/dts/dts-sms/Admin_dashboard/index.php" style="text-decoration: none">
                         <h6 style="text-align: left; font-size: 13px; margin-top: -1%; font-weight: 500; color: #fff; text-shadow: 2px 2px 1px #2679D3;">Admin Log in
                         <span style="float: right; font-size: 18px"><i class="fas fa-angle-right"></i></span>
                       </h6>
                       </a>
-                    </div>
+                    </div>-->
                   </div>
               </form>
             </div> <!-- end of container -->

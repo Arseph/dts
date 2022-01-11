@@ -63,6 +63,9 @@ if(isset($_POST['btnLogin'])){
     $head = mysqli_query($conn, "SELECT * from register where username = '$username' and password = '$password' and usertype = 'Department Head' ");
     $numrow2 = mysqli_num_rows($head);
 
+    $admin = mysqli_query($conn, "SELECT * from admin_account where username = '$username' and password = '$password' and usertype = 'Administrator' ");
+    $numrow3 = mysqli_num_rows($admin);
+
     if($numrow > 0){   
       while($row = mysqli_fetch_array($releaser)){
       $res_id = $row['id'];
@@ -121,6 +124,34 @@ if(isset($_POST['btnLogin'])){
         }
       }
 
+      elseif($numrow3 > 0){
+      while($row = mysqli_fetch_array($admin)){
+
+      $id = $row["id"];
+      $username = $row["username"];
+      $firstname = $row["firstname"];
+      $lastname = $row['lastname'];
+      $usertype = $row["usertype"];
+
+      #session_start();
+      $_SESSION['id'] = $id;
+      $_SESSION["username"] = $username;
+      $_SESSION["firstname"] = $firstname;
+      $_SESSION["lastname"] = $lastname;
+      $_SESSION["usertype"] = $usertype;
+      $res_id = $row['id'];
+      $curr_status = $row['status'];
+      }    
+      #header ('location: Releasing_Personnel/navbar.php');
+      if($curr_status== 1){
+      $_SESSION['error'] = "Unable to open your account. Please contact the admin.";
+      }else{
+          header ('location: Admin_dashboard/navbar.php');
+          unset($_SESSION['attempt']);
+          $_SESSION['success1'] = 'Welcome '.$_SESSION['usertype'];
+        }
+      }
+
       else{
         $_SESSION['error'] = 'Incorrect username and/or password. Please try again.';
         $_SESSION['attempt'] += 1;
@@ -136,3 +167,5 @@ if(isset($_POST['btnLogin'])){
 
         
 ?>
+
+

@@ -67,56 +67,6 @@
     </div>
 </div>
 
-<!-- send modal -->
-<div class="modal fade" id="send_modal_<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel<?php echo $row['id']; ?>" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">      
-		      <h4 class="modal-title" style="font-size: 18px; font-weight: 550; color: gray;">Send File</h4>
-		      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		     </div>
-            <div class="modal-body">
-		        <table id="recUser" class="responsive-table table-hover table-striped table-sm m-0" width="100%">
-          <thead style="background-color: #A8A8A8; color: white; font-size: 12px;">
-            <!--search-->
-            <div class="form-group has-search">
-              <span class="fa fa-search form-control-feedback"></span>
-              <input type="text" class="searchDept form-control" placeholder="Search by department" style="font-size: 12px; float: right; margin-left: 51%; margin-top: 1px; margin-bottom: 1%; width: 50%; height: 30px; border-radius: 0px; background-color: #F5F5F5;">
-            </div>
-
-            <tr class="myHead">
-              <th style="width: 40%; text-align: left; font-size: 11px">NAME</th>
-              <th style="width: 35%; text-align: left; font-size: 11px">POSITION</th>
-              <th style="width: 25%; text-align: left; font-size: 11px">DEPARTMENT</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-              include_once('connection_db/connection.php');
-              $sql = "SELECT * FROM register where usertype = 'Receiving Officer' and status =0";
-              //use for MySQLi-OOP
-              $query = $conn->query($sql);
-              while($row = $query->fetch_assoc()){
-                echo 
-                "<tr style='font-size: 12px'>
-                  <td style='text-align: left;' id='".$row['id']."'>".$row['fullname']."</td>
-                  <td style='text-align: left;'>(".$row['usertype'].")</td>
-                  <td style='text-align: left;'>".$row['department']."</td>
-                  <td>
-                    <button id='send_btn_".$row['id']."' href='#' class='btn btn-sm m-0' role='button' data-toggle='tooltip'title='Send Document' style='font-size: 18px; color: #3993DE;' onclick='sendDocu(".$row['id'].")'><span><i class='fas fa-paper-plane'></i></span></button>
-                  </td>
-                </tr>";
-              }
-            ?>
-          </tbody>
-        </table>
-            <div class="modal-footer" style="height: 50px">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 20%; margin-top: -1%; height: 35px; font-size: 13px;"> No</button>
-                <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" style="width: 20%; margin-top: -1%; height: 35px; font-size: 13px;"> Yes</a>
-            </div>
-
-
 <style>
 	.upload-box{
     font-size: 14px;

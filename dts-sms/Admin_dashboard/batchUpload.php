@@ -143,6 +143,16 @@ $username = $_SESSION['username'];
   </form>
 </div>
 
+<?php  
+    include('connection_db/connection.php');
+    $list = mysqli_query($conn, "SELECT COUNT(*) as count FROM batch_upload");
+
+    while ($listRow = mysqli_fetch_array($list))
+    {
+        $var = $listRow['count'];
+    }
+
+?>
 <?php include('addUserModal.php') ?>
 <div class="card shadow" style="width: 73%; margin-left: 25%; border: none; margin-top: 1% ">
   <div class="card-header" style="height: 50px; font-size: 13px; text-align: left; font-weight: 600; color: #747272; background-color: white;">
@@ -155,7 +165,8 @@ $username = $_SESSION['username'];
 
       <input type="text" class="search form-control rounded-0" placeholder="Search employee's name" style="font-size: 12px; float: right; margin-right: -1%; margin-top: -32px;margin-bottom: -5.5%; width: 30%">
   </div>
-  <div class="card-body" style="height: auto; display: fixed;">
+  <div class="card-body" style="height: auto; display: fixed; margin-top: -2%;">
+    <small style="font-size: 11px;"> Show <?php echo "[".$var."] entries";?></small>
   <div class="row">
         <table id="userTbl" class="responsive-table table-hover table-striped table-sm m-0" width="100%">
           <thead style="background-color: #0062CC; color: white; font-size: 12px;">

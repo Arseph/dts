@@ -54,16 +54,17 @@ $username = $_SESSION['username'];
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-left"
                                 aria-labelledby="userDropdown" style="border-radius: 0; height: auto; width: 23%;">
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
-                                    Search Departments
+                                <a class="dropdown-item" href="inquiry_document.php" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
+                                  Track Document
                                 </a>
+                                
 
                                 <div class="dropdown-divider" style="color: gray;"></div>
-                                <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
-                                  Document Status
+                                <a class="dropdown-item" href="viewDepartment.php" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%">
+                                    Search Departments
                                 </a>
                        
-                                <div class="dropdown-divider" style="color: gray;"></div>
+                                <!--<div class="dropdown-divider" style="color: gray;"></div>
                                 <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
                                     Track Document's Route
                                 </a>
@@ -82,7 +83,7 @@ $username = $_SESSION['username'];
                                 <a class="dropdown-item" href="#" style="color: gray; font-size: 12px; margin-top: -3%; margin-bottom: -3%" data-toggle="modal" class="identifyingClass" data-id="my_id_value">
                                     Select
                                 </a>
-                            </div>
+                            </div>-->
                     </li>
               </ul>
   </div>

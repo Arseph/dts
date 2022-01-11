@@ -115,6 +115,9 @@
   .tooltip{
    font-size: 10px;
  }
+ .isNotif{
+  display: none !important;
+ }
 </style>
 
 <!--- Logout Modal Confirmation --->
@@ -160,10 +163,10 @@
       success:function(data){
         var val = JSON.parse(data);
         $('#releasedDocument').html(val.output);
+        $(".badgeReleased").html(val.total);
         if(val.total <= 0) {
           $(".badgeReleased").addClass('isNotif');  
         } else {
-          $(".badgeReleased").html(val.total);
           $(".badgeReleased").removeClass('isNotif');
         }
       }
@@ -201,7 +204,7 @@
     if(sum <= 0) {
       $(".badgeReceived").addClass('isNotif');  
     } else {
-      $(".badgeReceived").html(val.total);
+      $(".badgeReceived").html(sum);
       $(".badgeReceived").removeClass('isNotif');
     }
   }

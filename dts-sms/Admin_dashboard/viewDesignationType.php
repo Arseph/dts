@@ -65,7 +65,16 @@ $username = $_SESSION['username'];
           position: fixed;
         }
 </style>
+<?php  
+    include('connection_db/connection.php');
+    $list = mysqli_query($conn, "SELECT COUNT(*) as count FROM tbl_designation");
 
+    while ($listRow = mysqli_fetch_array($list))
+    {
+        $var = $listRow['count'];
+    }
+
+?>
 <div class="info">
     <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / Manage Designation</b>
 </div>
@@ -103,7 +112,8 @@ $username = $_SESSION['username'];
 
       <input type="text" class="search form-control" placeholder="Search user tags" style="font-size: 12px; float: right; margin-right: -1%; margin-top: -1%;margin-bottom: -5%; width: 40%">
   </div>
-  <div class="card-body" style="height: auto; display: fixed;">
+  <div class="card-body" style="height: auto; display: fixed; margin-top: -2%;">
+    <small style="font-size: 11px; margin-top: -10%;">Show <?php echo "[".$var."] entries";?></small>
   <div class="row">
     <!--<div class="row" style="margin-top: -1%; margin-left: 5px;">
       <a type="button" id="select-all" style="cursor: pointer; margin-left: -1px; font-size: 12px">Select All</a>&nbsp;

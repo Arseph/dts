@@ -7,7 +7,7 @@
 		#$uploadPic = $_POST['uploadPic'];
 	    $pname = $_FILES["uploadPic"]["name"];
 	    $tname = $_FILES["uploadPic"]["tmp_name"];
-	    $uploads_dir = '../img/';
+	    $uploads_dir = 'img/';
     	move_uploaded_file($tname, $uploads_dir.'/'.$pname);
 		$sql = "UPDATE register SET imageProfile = '$pname' WHERE id = '$id'";
 

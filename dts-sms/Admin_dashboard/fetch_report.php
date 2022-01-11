@@ -1,3 +1,29 @@
+fetch_report.php
+Who has access
+
+A
+A
+D
+U
+System properties
+Type
+PHP
+Size
+3 KB
+Storage used
+3 KB
+Location
+Admin_dashboard
+Owner
+Nicole Haylynn Mancao
+Modified
+1:45 AM by Nicole Haylynn Mancao
+Opened
+10:29 AM by me
+Created
+9:04 AM
+Add a description
+Viewers can download
 <?php
 session_start();
 //fetch.php
@@ -47,14 +73,13 @@ if($total_row > 0)
     {
         $output .= '
         <tr style="font-size: 12px">
-            <td>'.$row["tracking_no"].'</td>
-            <td>'.$row["file_name"].'</td>
-            <td>'.$row["type_document"].'</td>
-            <td>'.$row["fullname"].'</td>
-            <td>'.$row["dept"].'</td>
             <td>'.$row["select_date"].'</td>
-            <td>'.$row["receiver_name"].'</td>
+            <td>'.$row["tracking_no"].'</td>
+            <td>'.$row["fullname"].'</td>
+            <td>'.$row["type_document"].'</td>
+            <td>'.$row["file_name"].'</td>
             <td>'.$row["date_and_time"].'</td>
+            <td>'.$row["receiver_name"].' ('.$row["dept"].')</td>
         </tr>
         ';
     }
@@ -69,3 +94,9 @@ else
 }
 echo $output;
 ?>
+
+<style>
+    td{
+        font-size: 12px;
+    }
+</style>

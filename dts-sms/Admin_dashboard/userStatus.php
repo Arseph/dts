@@ -77,6 +77,16 @@ $username = $_SESSION['username'];
         }
 </style>
 
+<?php  
+    include('connection_db/connection.php');
+    $list = mysqli_query($conn, "SELECT COUNT(*) as count FROM register");
+
+    while ($listRow = mysqli_fetch_array($list))
+    {
+        $var = $listRow['count'];
+    }
+
+?>
   <div class="info">
     <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / Manage Users Account</b>
   </div>
@@ -95,7 +105,8 @@ $username = $_SESSION['username'];
     </div>
       
   </div>
-  <div class="card-body" style="height: auto; display: fixed;">
+  <div class="card-body" style="height: auto; display: fixed; margin-top: -2%;">
+    <small style="font-size: 11px; margin-top: -10%;">Show <?php echo "[".$var."] entries";?></small>
   <div class="row">
       <!--<div class="row" style="margin-top: -1%; margin-left: 5px;">
     <a type="button" id="select-all" style="cursor: pointer; margin-left: -1px; font-size: 12px">Select All</a>&nbsp;
@@ -115,7 +126,7 @@ $username = $_SESSION['username'];
         <table id="userTbl" class="responsive-table table-hover table-striped table-sm m-0" width="100%">
           <thead style="background-color: #0062CC; color: white; font-size: 12px;">
             <tr class="myHead" style="height: 35px">
-     
+              <th style="width: 8%; text-align: left;"></th>
               <th style="width: 20%; text-align: left;">NAME</th>
               <th style="width: 18%; text-align: left;">POSITION</th>
               <th style="width: 18%; text-align: left;">USERNAME</th>
@@ -131,6 +142,7 @@ $username = $_SESSION['username'];
 
             ?>
             <tr style='font-size: 12px'>
+                <td style='text-align: left;'><img src="../img/<?php echo $row['imageProfile'];?>" onerror="this.src='img/noimage.png';this.onerror='';" alt="Avatar" width="40" height="40"></td>
                 <td style='text-align: left;'><?php echo $row['fullname'];?></td>
                 <td style='text-align: left;'><?php echo $row['usertype'];?></td>
                 <td style='text-align: left;'><?php echo $row['username'];?></td>

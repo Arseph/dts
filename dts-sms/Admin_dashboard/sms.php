@@ -28,8 +28,8 @@ if($_POST)
     $number = $_POST['number'];
     $sender = $_POST['sender'];
     $message = $_POST['message'];
-    $api = "TR-NICOL324736_4TB2Z";
-    $apipassword = "{8sq32)mux";
+    $api = "TR-SHAIN198242_57X8G";
+    $apipassword = "&hj5#!91ie";
     $text = $sender.": ".$message;
 
     if (!empty($_POST['sender']) && ($_POST['number']) && ($_POST['message'])){
@@ -37,7 +37,7 @@ if($_POST)
             if ($result == ""){
             echo "iTexMo: No response from server";  
             }else if ($result == 0){
-                $_SESSION['msgSuccess'] = 'Message Sent';
+                $_SESSION['msgSuccess'] = 'Message sent.';
             }
             else{   
                 $_SESSION['msgError'] = 'There was an error encountered';
@@ -110,7 +110,7 @@ if($_POST)
 </style>
 
 <div class="info">
-    <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / SMS Messaging</b>
+    <b style="font-size: 15px; font-weight: 600"><div class="navbar_link"></div><a href="navbar.php" style="font-size: 15px; font-weight: 600">Dashboard</a> / SMS Notification</b>
 </div>
 </div>
 
@@ -125,6 +125,10 @@ if($_POST)
     border-bottom: 1px solid #2F5597;
 
   }
+  .modal-body {
+    max-height: calc(80vh - 200px);
+    overflow-y: auto;
+}
 </style>
 
 <div class="card" style="width:950px; margin-left: 23.5%;">
@@ -137,19 +141,46 @@ if($_POST)
         <div class="card-body" style="height: auto;">
 
             <div class="container">
+            <button class="btn btn-success btn-sm" type="button" data-toggle="modal" data-target="#find_contacts" style="margin-left: 38%; font-size: 12px"><i class="fas fa-user"></i>&nbsp;&nbsp;Find Contacts</button>
+            
             <div class="form-group">
-            <label for="sender" style="margin-bottom: 4px; font-size: 14px;">Sender Name</label>
-            <input  class="form-control rounded-0" type="text" placeholder="Enter here" name="sender" id = "sender" style="font-size: 12px;" value="<?php echo $firstname; ?> <?php echo $lastname; ?> (<?php echo $username; ?>)" readonly /> 
+                <label for="sender" style="margin-bottom: 4px; font-size: 14px;" hidden="">Sender Name:</label>
+            <input  class="form-control rounded-0" type="text" name="sender" value="<?php echo $firstname; ?> <?php echo $lastname; ?> (<?php echo $username; ?>)" id = "sender" style="font-size: 12px;" hidden /> 
+
+            <label for="receiver" style="margin-bottom: 4px; font-size: 14px;">Receiver Name</label>
+            <input  class="form-control rounded-0" type="text" name="receiver" id = "receiver" style="font-size: 12px;" readonly /> 
            </div>
 
           <div class="form-group">
             <label for="number" style="margin-bottom: 4px; font-size: 14px;">Recepient's Mobile Number </label>
-            <input class="form-control rounded-0" type="text" placeholder="ex. (09123456789)" name="number" id = "number" style="font-size: 12px;" maxlength="11" onkeyup="validatephone(this);" id="phone" required /> 
+            <textarea class="form-control rounded-0" type="text" placeholder="ex. (09123456789)" name="number" id = "number" style="font-size: 12px; height: 70px" maxlength="11" onkeyup="validatephone(this);" required ></textarea>
+            <!--<input class="form-control rounded-0" type="text" placeholder="ex. (09123456789)" name="number" id = "number" style="font-size: 12px;" maxlength="11" onkeyup="validatephone(this);" id="phone" required /> -->
            </div>
 
            <div class="form-group">
-            <label for="message" style="margin-bottom: 4px; font-size: 14px;">Message Here</label>
-            <textarea class="form-control rounded-0" type="text" placeholder="Enter here" name="message" id = "message" style="font-size: 12px; height: 100px" onkeyup="countChar(this)" required ></textarea>
+            <hr>
+            <ul>
+                <div style="margin-left: 10%;">
+                  <input type="checkbox" value="Greetings!" class="checkMe" name="q1" id="q1" />
+                  <small for="q1">Greetings!</small>&nbsp;
+
+                  <input type="checkbox" value="How are you today?" class="checkMe" name="q2" id="q2" />
+                  <small for="q2">How are you today?</small>&nbsp;
+
+                  <input type="checkbox" value="Thank you." class="checkMe" name="q2" id="q2" />
+                  <small for="q2">Thank you.</small>
+                </div>
+                <div style="margin-left: 20%;">
+                  <input type="checkbox" value="Have a nice day!" class="checkMe" name="q2" id="q2" />
+                  <small for="q2">Have a nice day!</small>&nbsp;
+
+
+                  <input type="checkbox" value="See you later." class="checkMe" name="q2" id="q2" />
+                  <small for="q2">See you later.</small>
+                </div>
+            </ul>
+
+            <textarea class="form-control rounded-0" type="text" placeholder="Write a message..." name="message" id = "message" style="font-size: 12px; height: 100px" onkeyup="countChar(this)" required ></textarea>
            </div><p class="text-right" id="charNum" style="margin-top: -10px; font-size: 12px; color: red;">90</p><br>
 
            <div class="" style="background-color: white;">
@@ -162,6 +193,77 @@ if($_POST)
 </form>
 
 </div> 
+</div>
+
+<?php  
+    include('connection_db/connection.php');
+    $list = mysqli_query($conn, "SELECT COUNT(*) as count FROM batch_upload");
+
+    while ($listRow = mysqli_fetch_array($list))
+    {
+        $var = $listRow['count'];
+    }
+
+?>
+<div class="modal fade" id="find_contacts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document" style="">
+    <div class="modal-content" style="width: 100%; border: none">
+      <div class="modal-header" style="background-color: #0062CC; height: 40px">
+        <h5 class="modal-title" id="staticBackdropLabel" style="font-size: 14px; font-weight: 550; color: #F0F0F0; margin-top: -1%"><i class='fas fa-users'></i>&nbsp;&nbsp;Contacts</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -15px; color: white; font-size: 20px; margin-top: -4%">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+
+    
+
+        <table id="contacts" class="contacts responsive-table table-hover table-bordered table-sm m-0" width="100%">
+          <thead style="background-color: #A8A8A8; color: white; font-size: 12px;">
+            <!--search-->
+            <div class="form-group has-search">
+
+              <input type="text" class="contacts form-control" placeholder="Search employee" style="font-size: 12px; float: right; margin-left: 51%; margin-top: -10px; margin-bottom: -10%; width: 70%; height: 30px; border-radius: 0px; background-color: #F5F5F5;">
+            </div>
+
+            <tr class="myHead">
+                <small style="font-size: 11px;"> Show <?php echo "[".$var."] entries";?></small>
+                <th style="width: 5%; text-align: left; font-size: 11px"></th>
+            <!--<th style="width: 5%; text-align: left; font-size: 11px"><input id="check_all" type="checkbox"></th>-->
+              <th style="width: 50%; text-align: left; font-size: 11px">LIST OF EMPLOYEES</th>
+              <th style="width: 50%; text-align: left; font-size: 11px">DEPARTMENT</th>
+              <th style="width: 50%; text-align: left; font-size: 11px" hidden>PHONE NUMBERS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              include_once('connection_db/connection.php');
+              $sql = "SELECT * FROM batch_upload ORDER BY fullname ASC";
+              //use for MySQLi-OOP
+              $query = $conn->query($sql);
+              while($row = $query->fetch_assoc()){
+                echo 
+                "<tr style='font-size: 12px'>
+                <td class=''>
+                    <input type='checkbox' name='row-check' value=".$row["id"]." />
+                  </td>
+                  <td style='text-align: left;' id='".$row['id']."'>".$row['fullname']." </td>
+                  <td style='text-align: left;' id='".$row['id']."'>".$row['department']."</td>
+                  <td style='text-align: left;' hidden>".$row['phone_number']."</td>
+                </tr>";
+              }
+            ?>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 11px; height: 30px;margin-top: -1%">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="sendAll()" style="font-size: 11px; height: 30px;margin-top: -1%">Confirm</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
@@ -177,6 +279,52 @@ if($_POST)
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
+
+//fetch phone number
+//table select
+var table = document.getElementById('contacts');
+                
+  for(var i = 1; i < table.rows.length; i++)
+  {
+    table.rows[i].onclick = function()
+    {
+      //rIndex = this.rowIndex;
+      document.getElementById("number").value = this.cells[3].innerHTML;
+      document.getElementById("receiver").value = this.cells[1].innerHTML;
+      //document.getElementById("age").value = this.cells[2].innerHTML;
+                         
+    };
+  }
+
+//checkbox suggested message
+$(document).ready(function(){
+    $('.checkMe').click(function(){
+        var text="";
+        $('.checkMe:checked').each(function(){
+            text+=$(this).val()+ ',';
+        });
+        text=text.substring(0,text.length-1);
+        $('#message').val(text);
+
+    });
+});
+
+//search table
+$(document).ready(function(){
+    $('.contacts').on('keyup',function(){
+        var searchTerm = $(this).val().toLowerCase();
+        $('#contacts tbody tr').each(function(){
+            var lineStr = $(this).text().toLowerCase();
+            if(lineStr.indexOf(searchTerm) === -1){
+                $(this).hide();
+            }else{
+                $(this).show();
+            }
+        });
+    });
+});
+
+//num validation
     function countChar(val){
         var len = val.value.length;
         if(len >= 90){
@@ -208,4 +356,29 @@ function validatephone(phone)
     var maintainplus = '';
     phone.focus;
 }
+
+$(function() {
+    //If check_all checked then check all table rows
+    $("#check_all").on("click", function () {
+        if ($("input:checkbox").prop("checked")) {
+            $("input:checkbox[name='row-check']").prop("checked", true);
+        } else {
+            $("input:checkbox[name='row-check']").prop("checked", false);
+        }
+    });
+
+    // Check each table row checkbox
+    $("input:checkbox[name='row-check']").on("change", function () {
+        var total_check_boxes = $("input:checkbox[name='row-check']").length;
+        var total_checked_boxes = $("input:checkbox[name='row-check']:checked").length;
+
+        // If all checked manually then check check_all checkbox
+        if (total_check_boxes === total_checked_boxes) {
+            $("#check_all").prop("checked", true);
+        }
+        else {
+            $("#check_all").prop("checked", false);
+        }
+    });
+});
 </script>

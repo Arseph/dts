@@ -4,9 +4,8 @@
 
 	$message="";
 
-				require_once "PHPMailer/PHPMailer.php";
-        require_once "PHPMailer/SMTP.php";
-
+	require_once "PHPMailer/PHPMailer.php";
+    require_once "PHPMailer/SMTP.php";
 	require 'vendor/autoload.php';
 
 	function send_password_reset($get_email, $token)
@@ -33,10 +32,10 @@
 
 		 $mail->isHTML(true); 
 
-		 $mail->Subject = "Hi nicole, goodluck sa Defense natin HAHAHA";
-    $body = "<h3>Here is your reset password link.</h3> <a href='http://localhost/dts/dts-sms/password-change.php?token=$token&email=$get_email'>Click me.</a>";
+		 $mail->Subject = "Document Tracking System";
+    $body = "<h3>Here is your reset password link.</h3> <a href='http://localhost/dts/dts-sms/password-change.php?token=$token&email=$get_email'>Click to reset your password.</a>";
     $mail->Body = $body;
-    $mail->AltBody = "This is the reset password link from DTS";
+    //$mail->AltBody = "This is the reset password link from DTS";
     $mail->send();
   }
 	
@@ -64,17 +63,17 @@
 			if($update_token_run)
 			{
 				send_password_reset($get_email, $token);
-				$_SESSION['status'] = "We e-mail you a passord reset";
+				$_SESSION['status'] = "We e-mail you a password reset.";
 				header("Location: password-reset.php");
 			}
 			else
 			{
-				$_SESSION['status'] = "Something went wrong. #1";
+				$_SESSION['error'] = "Something went wrong. Please try again.";
 				header("Location: password-reset.php");	
 			}	
 		}
 			else{
-				$_SESSION['status'] = "No email found.";
+				$_SESSION['error'] = "No email found.";
 				header("Location: password-reset.php");	 
 		}
 	}
